@@ -66,13 +66,19 @@ ${SITE_CONTENT}
 
 Rules:
 - Answer using the website content above as your knowledge base. Prefer facts from the site.
-- Be professional, clear, and helpful — like a top American HVAC service desk.
-- Keep replies concise (usually 2–5 sentences) unless the customer asks for more detail.
-- Reply in the customer's language (English or Portuguese).
+- Formal, professional, clear, and explanatory — like a polished American HVAC service desk.
+- Reply in the customer's language (English, Portuguese, Spanish, or whatever language they write in). Always match their language.
 - Do NOT invent prices, appointment slots, license numbers, or rebate amounts.
 - For quotes, emergencies, or scheduling, direct them to call (508) 736-5180 or email hvacjorges@gmail.com.
 - If something is not on the site, say you can connect them with the team by phone/email.
-- Only discuss Jorge's HVAC, comfort systems, Mass Save HVAC incentives, and contacting the company.`;
+- Only discuss Jorge's HVAC, comfort systems, Mass Save HVAC incentives, and contacting the company.
+
+Formatting (critical):
+- Return ONLY valid JSON with this shape: {"bubbles":["...","..."]}
+- Use 2 to 4 short bubbles. Each bubble should be 1 or 2 sentences.
+- Plain text only. No markdown. No asterisks. No bold. No bullet lists. No emojis. No decorative symbols.
+- Write phone numbers and emails as plain text, for example: (508) 736-5180 and hvacjorges@gmail.com.
+- Do not pack everything into one long paragraph; split naturally across bubbles.`;
 
 exports.handler = async (event) => {
   const headers = {
@@ -111,6 +117,7 @@ exports.handler = async (event) => {
   }
 
   const incoming = Array.isArray(payload.messages) ? payload.messages : [];
+  const uiLang = ["en", "pt", "es"].includes(payload.lang) ? payload.lang : null;
   const messages = incoming
     .filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
     .slice(-16)
@@ -119,6 +126,10 @@ exports.handler = async (event) => {
   if (!messages.length || messages[messages.length - 1].role !== "user") {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Need a user message" }) };
   }
+
+  const langHint = uiLang
+    ? `\n\nWebsite UI language is currently set to ${uiLang}. Prefer that language unless the customer clearly writes in another language.`
+    : "";
 
   // Prefer fast chat models; fall back if an account cannot use a given ID.
   const modelAttempts = [
@@ -136,7 +147,7 @@ exports.handler = async (event) => {
       const body = {
         model: attempt.model,
         max_tokens: attempt.max_tokens,
-        system: SYSTEM_PROMPT,
+        system: SYSTEM_PROMPT + langHint,
         messages,
       };
       if (attempt.thinking) body.thinking = attempt.thinking;
@@ -201,19 +212,51 @@ exports.handler = async (event) => {
       };
     }
 
-    const reply = (data.content || [])
+    const raw = (data.content || [])
       .filter((p) => p.type === "text")
       .map((p) => p.text)
       .join("\n")
       .trim();
 
+    let bubbles = [];
+    try {
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      const parsed = JSON.parse(jsonMatch ? jsonMatch[0] : raw);
+      if (Array.isArray(parsed.bubbles)) {
+        bubbles = parsed.bubbles
+          .map((b) => String(b || "").replace(/[*_`#]/g, "").trim())
+          .filter(Boolean)
+          .slice(0, 4);
+      }
+    } catch {
+      bubbles = [];
+    }
+
+    if (!bubbles.length) {
+      const cleaned = raw
+        .replace(/```json|```/g, "")
+        .replace(/[*_`#]/g, "")
+        .replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, "")
+        .trim();
+      bubbles = cleaned
+        .split(/\n{2,}|(?<=[.!?])\s+(?=[A-ZÀ-Ú])/)
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .slice(0, 4);
+    }
+
+    if (!bubbles.length) {
+      bubbles = [
+        "Thank you for contacting Jorge's HVAC. Please call (508) 736-5180 and our team will be glad to help.",
+      ];
+    }
+
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
-        reply:
-          reply ||
-          "Thanks for your message. Call (508) 736-5180 and Jorge's team can help with your HVAC question.",
+        bubbles,
+        reply: bubbles.join(" "),
       }),
     };
   } catch (err) {
