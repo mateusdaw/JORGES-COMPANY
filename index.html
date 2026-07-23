@@ -508,6 +508,21 @@
   .chat-msg .time{
     display:block;margin-top:5px;font-size:10px;opacity:.65;
   }
+  .chat-msg.typing .bubble{
+    min-width:54px;
+    display:inline-flex;align-items:center;gap:5px;
+    padding:14px 16px;
+  }
+  .chat-msg.typing .dotty{
+    width:7px;height:7px;border-radius:50%;background:#7a1230;opacity:.35;
+    animation:chatBounce 1.2s infinite ease-in-out;
+  }
+  .chat-msg.typing .dotty:nth-child(2){animation-delay:.15s;}
+  .chat-msg.typing .dotty:nth-child(3){animation-delay:.3s;}
+  @keyframes chatBounce{
+    0%,80%,100%{transform:translateY(0);opacity:.3;}
+    40%{transform:translateY(-4px);opacity:1;}
+  }
   .chat-input{
     display:flex;gap:8px;align-items:center;
     padding:10px 12px 8px;background:#fff;border-top:1px solid #e8ecf2;
@@ -869,6 +884,7 @@
   var sendBtn = document.getElementById('chatSend');
   var log = document.getElementById('chatLog');
   var history = [];
+  var busy = false;
   var AVATAR = 'assets/images/fabiano-avatar.jpg';
 
   function stamp() {
@@ -879,19 +895,6 @@
     }
   }
 
-  function addMsg(role, text) {
-    var row = document.createElement('div');
-    row.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
-    var html = '';
-    if (role !== 'user') {
-      html += '<img class="av" src="' + AVATAR + '" alt="">';
-    }
-    html += '<div class="bubble">' + escapeHtml(text) + '<span class="time">' + stamp() + '</span></div>';
-    row.innerHTML = html;
-    log.appendChild(row);
-    log.scrollTop = log.scrollHeight;
-  }
-
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, '&amp;')
@@ -900,11 +903,65 @@
       .replace(/"/g, '&quot;');
   }
 
-  function seed() {
+  function addMsg(role, text) {
+    var row = document.createElement('div');
+    row.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+    var html = '';
+    if (role !== 'user') {
+      html += '<img class="av" src="' + AVATAR + '" alt="">';
+    }
+    html += '<div class="bubble"><span class="txt">' + escapeHtml(text) + '</span><span class="time">' + stamp() + '</span></div>';
+    row.innerHTML = html;
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+    return row;
+  }
+
+  function showTyping() {
+    var row = document.createElement('div');
+    row.className = 'chat-msg bot typing';
+    row.id = 'chatTyping';
+    row.innerHTML = '<img class="av" src="' + AVATAR + '" alt=""><div class="bubble"><span class="dotty"></span><span class="dotty"></span><span class="dotty"></span></div>';
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+    return row;
+  }
+
+  function hideTyping() {
+    var el = document.getElementById('chatTyping');
+    if (el) el.remove();
+  }
+
+  function typewriter(text) {
+    return new Promise(function (resolve) {
+      var row = document.createElement('div');
+      row.className = 'chat-msg bot';
+      row.innerHTML = '<img class="av" src="' + AVATAR + '" alt=""><div class="bubble"><span class="txt"></span><span class="time">' + stamp() + '</span></div>';
+      log.appendChild(row);
+      var txt = row.querySelector('.txt');
+      var i = 0;
+      var step = Math.max(1, Math.floor(text.length / 90));
+      function tick() {
+        i = Math.min(text.length, i + step);
+        txt.textContent = text.slice(0, i);
+        log.scrollTop = log.scrollHeight;
+        if (i < text.length) {
+          setTimeout(tick, 18);
+        } else {
+          resolve(row);
+        }
+      }
+      tick();
+    });
+  }
+
+  async function seed() {
     log.innerHTML = '';
     history = [];
-    addMsg('bot', 'Enter your question below and a representative will get right back to you.');
-    addMsg('bot', 'Ask about AC, heating, heat pumps, water heaters, Mass Save rebates, or scheduling — I can help with the first answers.');
+    showTyping();
+    await new Promise(function (r) { setTimeout(r, 700); });
+    hideTyping();
+    await typewriter('Hi — how can Jorge’s HVAC help you today?');
   }
 
   function openChat() {
@@ -923,61 +980,45 @@
   });
   closeBtn.addEventListener('click', closeChat);
   resetBtn.addEventListener('click', function () {
+    if (busy) return;
     seed();
     input.focus();
   });
 
-  function localReply(text) {
-    var t = text.toLowerCase();
-    if (/mass\s*save|rebate|incentiv|desconto|bomba de calor|heat\s*pump/.test(t)) {
-      return 'Yes — as a Mass Save® Heat Pump Installer, Jorge’s helps homeowners pursue HVAC incentives, especially for heat pumps. If a system doesn’t qualify, it’s usually due to specific program rules. Call (508) 736-5180 and we’ll check your options.';
-    }
-    if (/ac|air\s*cond|cooling|ar\s*cond|refriger/.test(t)) {
-      return 'We install, repair, and maintain air conditioning systems for homes and light commercial spaces. Tell us what’s going on — warm rooms, leaks, or a unit that won’t start — or call (508) 736-5180 for service.';
-    }
-    if (/heat|furnace|aquec|calef/.test(t)) {
-      return 'Jorge’s handles heating systems including furnaces and heat pumps — diagnostics, repairs, and full installs. For a quote or service visit, call (508) 736-5180.';
-    }
-    if (/water\s*heater|água|agua quente|hot water/.test(t)) {
-      return 'We install efficient gas water heaters with clean, code-compliant connections. Call (508) 736-5180 to schedule an assessment.';
-    }
-    if (/price|orçamento|orcamento|quote|cost|preço|preco/.test(t)) {
-      return 'Pricing depends on the system, home, and scope of work. Share a few details here, or call (508) 736-5180 for a clear quote from the team.';
-    }
-    if (/hours|horário|horario|open|address|endereço|endereco|where/.test(t)) {
-      return 'We’re at 200 E Main St, Marlborough, MA 01752. Call (508) 736-5180 or email hvacjorges@gmail.com — Fabiano and the team will point you in the right direction.';
-    }
-    return 'Thanks for reaching out to Jorge’s HVAC. We handle cooling, heating, air quality, water heaters, and Mass Save heat-pump upgrades. Ask me anything specific, or call (508) 736-5180 for fast help.';
-  }
-
   async function askAi(userText) {
     history.push({ role: 'user', content: userText });
-    try {
-      var res = await fetch('/.netlify/functions/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history })
-      });
-      var data = await res.json().catch(function () { return {}; });
-      var reply = data.reply || localReply(userText);
-      history.push({ role: 'assistant', content: reply });
-      return reply;
-    } catch (e) {
-      var fallback = localReply(userText);
-      history.push({ role: 'assistant', content: fallback });
-      return fallback;
-    }
+    var res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history })
+    });
+    var data = await res.json().catch(function () { return {}; });
+    var reply = (data && data.reply) || 'Please call (508) 736-5180 and our team will help you right away.';
+    history.push({ role: 'assistant', content: reply });
+    return reply;
   }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    if (busy) return;
     var text = (input.value || '').trim();
     if (!text) return;
     input.value = '';
     addMsg('user', text);
+    busy = true;
     sendBtn.disabled = true;
-    var reply = await askAi(text);
-    addMsg('bot', reply);
+    showTyping();
+    try {
+      var reply = await askAi(text);
+      // keep dots visible briefly so it feels like thinking/typing
+      await new Promise(function (r) { setTimeout(r, 350); });
+      hideTyping();
+      await typewriter(reply);
+    } catch (err) {
+      hideTyping();
+      await typewriter('Connection issue — please call (508) 736-5180 and we will help you right away.');
+    }
+    busy = false;
     sendBtn.disabled = false;
     input.focus();
   });
