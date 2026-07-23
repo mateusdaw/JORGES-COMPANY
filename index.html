@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jorge's HVAC | Air Conditioning &amp; Heating — Marlborough, MA</title>
-<meta name="description" content="Jorge's Air Conditioning & Heating — professional heating, cooling, air quality, and water heater service in Marlborough, Massachusetts. Mass Save® partner.">
+<meta name="description" content="Jorge's Air Conditioning & Heating — heating, cooling, air quality, and water heater service in Marlborough, Massachusetts. Mass Save® partner.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,18 +15,18 @@
     --red:#c8102e;
     --red-2:#e11d3a;
     --white:#ffffff;
-    --paper:#fafbfc;
-    --line:#e4e9f0;
+    --paper:#f5f7fa;
+    --line:#dde3ec;
     --ink:#142033;
-    --muted:#5a6b82;
-    --shadow:0 18px 40px -24px rgba(16,35,63,.35);
+    --muted:#52657d;
+    --shadow:0 16px 36px -22px rgba(16,35,63,.4);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
     color:var(--ink);
-    background:var(--paper);
+    background:var(--white);
     font-family:'Source Sans 3',sans-serif;
     -webkit-font-smoothing:antialiased;
   }
@@ -38,286 +38,265 @@
     margin:0;
     font-weight:400;
   }
-  .wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px;}
   @media(min-width:768px){.wrap{padding:0 28px;}}
 
   .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
+    display:inline-flex;align-items:center;gap:8px;
     font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--red);margin-bottom:12px;
+    color:var(--red);margin-bottom:10px;
   }
   .eyebrow::before{
-    content:"";width:22px;height:2px;
+    content:"";width:18px;height:2px;
     background:linear-gradient(90deg,var(--red),#1a4b8c);
   }
+  .eyebrow.light{color:#ffb7c1;}
+  .eyebrow.light::before{background:linear-gradient(90deg,#ffb7c1,#9eb6ff);}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
     padding:13px 22px;border-radius:4px;text-decoration:none;
-    font-weight:700;font-size:14.5px;letter-spacing:.01em;
-    transition:transform .2s ease, background .2s ease;
+    font-weight:700;font-size:14.5px;
+    transition:transform .18s ease, background .18s ease;
   }
   .btn:hover{transform:translateY(-1px);}
   .btn-red{background:var(--red);color:#fff;}
   .btn-red:hover{background:var(--red-2);}
+  .btn-ghost{
+    background:rgba(255,255,255,.12);color:#fff;
+    border:1px solid rgba(255,255,255,.35);
+  }
   .btn-outline{
     background:#fff;color:var(--navy);border:1px solid var(--line);
   }
-  .btn-outline:hover{border-color:#c5d0de;}
 
-  /* Header — white */
+  /* Header */
   header{
-    position:sticky;top:0;z-index:40;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(12px);
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   .nav{
-    max-width:1120px;margin:0 auto;padding:10px 20px;
-    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    max-width:1120px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
   }
-  @media(min-width:768px){.nav{padding:12px 28px;}}
-  .brand img{
-    height:46px;width:auto;display:block;
-  }
-  @media(min-width:900px){.brand img{height:52px;}}
-  .links{display:flex;gap:24px;font-size:14px;font-weight:600;}
+  @media(min-width:768px){.nav{padding:11px 28px;}}
+  .brand img{height:44px;width:auto;}
+  @media(min-width:900px){.brand img{height:50px;}}
+  .links{display:flex;gap:22px;font-size:14px;font-weight:600;}
   .links a{color:var(--muted);text-decoration:none;}
   .links a:hover{color:var(--navy);}
   .call-pill{
-    display:inline-flex;align-items:center;
     background:var(--red);color:#fff;text-decoration:none;
-    padding:10px 14px;border-radius:4px;font-weight:700;font-size:13.5px;
+    padding:10px 14px;border-radius:4px;font-weight:700;font-size:13px;
     white-space:nowrap;
   }
-  .menu-btn{
-    display:none;background:none;border:0;color:var(--navy);
-    font-size:26px;cursor:pointer;line-height:1;padding:4px;
-  }
+  .menu-btn{display:none;background:none;border:0;color:var(--navy);font-size:26px;cursor:pointer;}
   @media(max-width:860px){
     .links{
       display:none;position:absolute;top:100%;left:0;right:0;
-      background:#fff;flex-direction:column;padding:14px 20px 18px;gap:14px;
+      background:#fff;flex-direction:column;padding:12px 18px 16px;gap:12px;
       border-bottom:1px solid var(--line);
     }
     .links.open{display:flex;}
     .menu-btn{display:block;}
     .nav{position:relative;}
-    .call-pill{padding:9px 12px;font-size:12.5px;}
   }
 
-  /* Hero — clean, white-forward */
+  /* HERO — full bleed, centered, van background */
   .hero{
-    background:#fff;
-    border-bottom:1px solid var(--line);
+    position:relative;
+    min-height:min(78vh,680px);
+    display:grid;
+    place-items:center;
+    text-align:center;
+    color:#fff;
     overflow:hidden;
   }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:0;
-    align-items:stretch;
-    min-height:auto;
+  .hero-bg{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(11,26,48,.55) 0%, rgba(11,26,48,.72) 45%, rgba(11,26,48,.88) 100%),
+      url('assets/images/hero-fleet-wide.jpg') center 45%/cover no-repeat;
+    transform:scale(1.03);
   }
-  @media(min-width:900px){
-    .hero-grid{grid-template-columns:1.05fr .95fr;min-height:560px;}
+  .hero-inner{
+    position:relative;z-index:2;
+    width:min(820px,100%);
+    padding:72px 18px 64px;
   }
-  .hero-copy{
-    padding:36px 0 28px;
-    display:flex;flex-direction:column;justify-content:center;
-  }
-  @media(min-width:900px){
-    .hero-copy{padding:56px 36px 56px 0;}
-  }
-  .hero-brand{
-    width:min(240px,70vw);height:auto;margin-bottom:18px;
+  @media(min-width:768px){.hero-inner{padding:96px 28px 84px;}}
+  .hero-logo{
+    width:min(210px,58vw);margin:0 auto 18px;
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
   }
   .hero h1{
-    font-size:clamp(34px,6.5vw,58px);
-    line-height:.95;
-    color:var(--navy);
-    max-width:13ch;
+    font-size:clamp(42px,8.2vw,78px);
+    line-height:.9;
+    text-wrap:balance;
+    text-shadow:0 10px 30px rgba(0,0,0,.35);
   }
-  .hero h1 span{color:var(--red);}
+  .hero h1 em{
+    font-style:normal;
+    color:#ffd0d7;
+  }
   .hero .lead{
-    margin:14px 0 24px;
-    color:var(--muted);
-    font-size:clamp(15px,2.2vw,17.5px);
-    line-height:1.6;
-    max-width:38ch;
+    margin:16px auto 26px;
+    max-width:42ch;
+    font-size:clamp(15px,2.1vw,18px);
+    line-height:1.55;
+    color:rgba(255,255,255,.9);
   }
-  .cta-row{display:flex;flex-wrap:wrap;gap:10px;}
-  .hero-meta{
+  .hero .cta-row{
+    display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+  }
+  .hero-bar{
+    position:relative;z-index:2;
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:12px;
-    margin-top:28px;
-    padding-top:18px;
-    border-top:1px solid var(--line);
+    grid-template-columns:repeat(3,1fr);
+    width:min(920px,100%);
+    margin:-28px auto 0;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:8px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
   }
-  @media(max-width:520px){
-    .hero-meta{grid-template-columns:1fr;gap:10px;}
+  .hero-bar div{
+    padding:16px 14px;
+    text-align:center;
+    border-right:1px solid var(--line);
   }
-  .hero-meta b{
+  .hero-bar div:last-child{border-right:0;}
+  .hero-bar b{
     display:block;
     font-family:'Bebas Neue',sans-serif;
     font-size:22px;
     color:var(--navy);
-    letter-spacing:.03em;
   }
-  .hero-meta span{font-size:12.5px;color:var(--muted);}
-  .hero-photo{
-    position:relative;
-    min-height:280px;
-    background:#eef2f6 url('assets/images/hero-fleet.jpg') center/cover no-repeat;
-  }
-  @media(min-width:600px){.hero-photo{min-height:360px;}}
-  @media(min-width:900px){.hero-photo{min-height:100%;}}
-  .hero-photo::after{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(180deg, transparent 55%, rgba(255,255,255,.18));
+  .hero-bar span{font-size:12px;color:var(--muted);}
+  @media(max-width:560px){
+    .hero-bar{grid-template-columns:1fr;margin-top:-18px;}
+    .hero-bar div{border-right:0;border-bottom:1px solid var(--line);}
+    .hero-bar div:last-child{border-bottom:0;}
   }
 
-  /* Stripe */
+  /* Stripe tight */
   .usa-stripe{
-    display:grid;
-    grid-template-columns:1fr;
-    background:#fff;
-    border-bottom:1px solid var(--line);
-  }
-  @media(min-width:800px){.usa-stripe{grid-template-columns:1.2fr 1fr 1fr;}}
-  .usa-stripe article{
-    padding:22px 20px;
-    border-bottom:1px solid var(--line);
-  }
-  @media(min-width:800px){
-    .usa-stripe article{
-      padding:26px 28px;
-      border-bottom:0;
-      border-right:1px solid var(--line);
-    }
-    .usa-stripe article:last-child{border-right:0;}
-  }
-  .usa-stripe article:last-child{
-    background:var(--red);
+    display:grid;grid-template-columns:1fr;
+    margin-top:28px;
+    background:var(--navy-deep);
     color:#fff;
   }
-  .usa-stripe h3{font-size:26px;margin-bottom:6px;color:var(--navy);}
-  .usa-stripe article:last-child h3{color:#fff;}
-  .usa-stripe p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
-  .usa-stripe article:last-child p{color:rgba(255,255,255,.9);}
+  @media(min-width:800px){.usa-stripe{grid-template-columns:1.15fr 1fr 1fr;}}
+  .usa-stripe article{padding:20px 18px;}
+  @media(min-width:800px){
+    .usa-stripe article{padding:22px 26px;border-right:1px solid rgba(255,255,255,.1);}
+    .usa-stripe article:last-child{border-right:0;}
+  }
+  .usa-stripe article:last-child{background:var(--red);}
+  .usa-stripe h3{font-size:24px;margin-bottom:4px;}
+  .usa-stripe p{margin:0;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.8);}
 
-  /* Sections */
-  section{padding:64px 0;}
-  @media(min-width:768px){section{padding:84px 0;}}
+  section{padding:52px 0;}
+  @media(min-width:768px){section{padding:64px 0;}}
   .sec-title{
-    font-size:clamp(30px,5vw,48px);
-    line-height:.96;
+    font-size:clamp(30px,4.8vw,46px);
+    line-height:.95;
     color:var(--navy);
-    max-width:16ch;
+    max-width:18ch;
   }
   .sec-copy{
-    margin:12px 0 0;
+    margin:10px 0 0;
     color:var(--muted);
-    font-size:16px;
-    line-height:1.65;
+    font-size:15.5px;
+    line-height:1.6;
     max-width:48ch;
   }
 
   /* About */
-  .about{background:#fff;}
+  .about{background:var(--paper);}
   .about-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:28px;
-    align-items:center;
+    display:grid;grid-template-columns:1fr;gap:22px;align-items:center;
   }
   @media(min-width:900px){
-    .about-grid{grid-template-columns:0.95fr 1.05fr;gap:48px;}
+    .about-grid{grid-template-columns:0.92fr 1.08fr;gap:40px;}
   }
   .about-photo{
     border-radius:8px;overflow:hidden;
     box-shadow:var(--shadow);
-    aspect-ratio:4/5;
-    background:#eef2f6;
+    aspect-ratio:1/1;
+    background:#dfe6ef;
   }
-  .about-photo img{
-    width:100%;height:100%;object-fit:cover;
-  }
+  .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
   .about-copy p{
-    color:var(--muted);
-    font-size:16px;
-    line-height:1.7;
-    margin:0 0 14px;
+    color:var(--muted);font-size:15.5px;line-height:1.65;margin:0 0 12px;
   }
   .pledge{
-    margin-top:18px;padding:16px 18px;
+    margin-top:14px;padding:14px 16px;
     border-left:3px solid var(--red);
-    background:#fff5f6;
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:3px solid var(--red);
   }
-  .pledge strong{display:block;font-size:14.5px;color:var(--navy);margin-bottom:4px;}
-  .pledge span{font-size:14px;color:var(--muted);line-height:1.5;}
+  .pledge strong{display:block;font-size:14px;color:var(--navy);margin-bottom:3px;}
+  .pledge span{font-size:13.5px;color:var(--muted);line-height:1.45;}
 
-  /* Services */
-  .services{background:var(--paper);}
-  .services-head{margin-bottom:28px;}
-  .service-list{display:grid;gap:14px;}
-  .service-row{
+  /* Services denser 2x2 */
+  .services{background:#fff;}
+  .services-head{margin-bottom:22px;}
+  .service-grid{
     display:grid;
     grid-template-columns:1fr;
-    background:#fff;
+    gap:14px;
+  }
+  @media(min-width:700px){.service-grid{grid-template-columns:1fr 1fr;}}
+  .service-card{
+    background:var(--paper);
     border:1px solid var(--line);
     border-radius:8px;
     overflow:hidden;
+    transition:transform .2s ease;
   }
-  @media(min-width:700px){
-    .service-row{grid-template-columns:200px 1fr;}
-  }
-  .service-row .shot{
-    min-height:180px;
+  .service-card:hover{transform:translateY(-2px);}
+  .service-card .shot{
+    height:160px;
     background:#10233f center/cover no-repeat;
   }
-  @media(min-width:700px){.service-row .shot{min-height:100%;}}
-  .service-row .body{padding:22px 22px 24px;}
-  @media(min-width:700px){.service-row .body{padding:26px 28px;}}
-  .service-row .num{
+  @media(min-width:700px){.service-card .shot{height:180px;}}
+  .service-card .body{padding:16px 16px 18px;}
+  .service-card .num{
     font-family:'Bebas Neue',sans-serif;
-    font-size:14px;letter-spacing:.14em;
-    color:var(--red);margin-bottom:6px;
+    font-size:13px;letter-spacing:.12em;color:var(--red);
   }
-  .service-row h3{font-size:30px;color:var(--navy);margin-bottom:8px;}
-  .service-row p{margin:0;color:var(--muted);line-height:1.6;font-size:15px;max-width:58ch;}
+  .service-card h3{font-size:28px;color:var(--navy);margin:4px 0 6px;}
+  .service-card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
 
-  /* Field */
+  /* Field / work band */
   .field{
     position:relative;color:#fff;padding:0;
-    min-height:420px;display:flex;align-items:center;
-    overflow:hidden;
+    min-height:380px;display:flex;align-items:center;overflow:hidden;
   }
-  @media(min-width:768px){.field{min-height:500px;}}
+  @media(min-width:768px){.field{min-height:420px;}}
   .field-bg{
     position:absolute;inset:0;
     background:
-      linear-gradient(90deg, rgba(11,26,48,.88), rgba(11,26,48,.45) 70%),
-      url('assets/images/team-job-clean.jpg') center/cover no-repeat;
+      linear-gradient(90deg, rgba(11,26,48,.9), rgba(11,26,48,.55) 70%),
+      url('assets/images/install-bosch.jpg') center/cover no-repeat;
   }
-  .field .wrap{position:relative;z-index:2;padding:64px 20px;}
-  @media(min-width:768px){.field .wrap{padding:84px 28px;}}
-  .field h2{color:#fff;font-size:clamp(34px,6vw,56px);max-width:12ch;}
-  .field p{color:rgba(255,255,255,.88);font-size:16px;line-height:1.6;max-width:36ch;margin:14px 0 22px;}
+  .field .wrap{position:relative;z-index:2;padding:52px 18px;}
+  @media(min-width:768px){.field .wrap{padding:64px 28px;}}
+  .field h2{color:#fff;font-size:clamp(32px,5.5vw,52px);max-width:14ch;}
+  .field p{color:rgba(255,255,255,.88);font-size:15.5px;line-height:1.55;max-width:40ch;margin:12px 0 18px;}
 
-  /* Videos — equal squares */
-  .videos{background:#fff;}
-  .videos-head{margin-bottom:28px;}
+  /* Videos */
+  .videos{background:var(--paper);}
+  .videos-head{margin-bottom:20px;}
   .video-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:16px;
+    display:grid;grid-template-columns:1fr;gap:14px;
   }
-  @media(min-width:700px){
-    .video-grid{grid-template-columns:1fr 1fr;gap:18px;}
-  }
+  @media(min-width:700px){.video-grid{grid-template-columns:1fr 1fr;gap:16px;}}
   .video-card{
     position:relative;
     border-radius:10px;
@@ -325,121 +304,119 @@
     background:#0b1a30;
     border:1px solid var(--line);
     box-shadow:var(--shadow);
-    aspect-ratio:1 / 1;
+    aspect-ratio:1/1;
   }
   .video-card video{
-    width:100%;
-    height:100%;
+    width:100%;height:100%;
     object-fit:cover;
     object-position:center;
     background:#0b1a30;
   }
+  .play-btn{
+    position:absolute;inset:0;z-index:3;
+    display:grid;place-items:center;
+    background:rgba(11,26,48,.28);
+    border:0;cursor:pointer;padding:0;
+  }
+  .play-btn span{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--red);color:#fff;
+    display:grid;place-items:center;
+    font-size:22px;box-shadow:0 12px 28px rgba(200,16,46,.45);
+  }
+  .video-card.is-playing .play-btn{display:none;}
   .video-label{
-    position:absolute;left:12px;bottom:12px;z-index:2;
+    position:absolute;left:10px;bottom:10px;z-index:2;
     background:rgba(11,26,48,.82);color:#fff;
-    padding:7px 10px;border-radius:4px;
-    font-size:11px;font-weight:700;
-    letter-spacing:.08em;text-transform:uppercase;
+    padding:6px 9px;border-radius:4px;
+    font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
     pointer-events:none;
   }
 
   /* Proof */
-  .proof{background:var(--paper);}
+  .proof{background:#fff;}
   .proof-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:16px;
+    display:grid;grid-template-columns:1fr;gap:14px;
   }
-  @media(min-width:860px){
-    .proof-grid{grid-template-columns:.9fr 1.1fr;gap:20px;}
-  }
+  @media(min-width:860px){.proof-grid{grid-template-columns:1fr 1fr;gap:16px;}}
   .proof-photo{
-    border-radius:8px;overflow:hidden;min-height:280px;
-    background:url('assets/images/install-bosch.jpg') center/cover no-repeat;
+    border-radius:8px;min-height:260px;
+    background:url('assets/images/service-install.jpg') center/cover no-repeat;
     box-shadow:var(--shadow);
   }
-  @media(min-width:860px){.proof-photo{min-height:420px;}}
+  @media(min-width:860px){.proof-photo{min-height:380px;}}
   .proof-panel{
     background:var(--navy-deep);color:#fff;border-radius:8px;
-    padding:28px 24px;
-    display:flex;flex-direction:column;justify-content:center;
+    padding:26px 22px;display:flex;flex-direction:column;justify-content:center;
   }
-  @media(min-width:768px){.proof-panel{padding:40px 34px;}}
-  .proof-panel h2{color:#fff;font-size:clamp(30px,4vw,44px);margin-bottom:12px;}
-  .proof-panel p{color:rgba(255,255,255,.8);line-height:1.65;margin:0 0 14px;font-size:15.5px;}
-  .checks{list-style:none;padding:0;margin:6px 0 0;}
+  @media(min-width:768px){.proof-panel{padding:34px 30px;}}
+  .proof-panel h2{color:#fff;font-size:clamp(28px,4vw,40px);margin-bottom:10px;}
+  .proof-panel p{color:rgba(255,255,255,.8);line-height:1.55;margin:0 0 10px;font-size:15px;}
+  .checks{list-style:none;padding:0;margin:4px 0 0;}
   .checks li{
     display:flex;gap:10px;align-items:flex-start;
-    padding:10px 0;border-top:1px solid rgba(255,255,255,.12);
-    font-size:14.5px;color:rgba(255,255,255,.92);
+    padding:9px 0;border-top:1px solid rgba(255,255,255,.12);
+    font-size:14px;color:rgba(255,255,255,.92);
   }
   .checks li::before{
-    content:"";width:9px;height:9px;margin-top:5px;flex-shrink:0;
-    background:var(--red);border-radius:1px;
+    content:"";width:8px;height:8px;margin-top:5px;flex-shrink:0;background:var(--red);
   }
 
-  /* Quote */
-  .quote{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .quote .wrap{max-width:760px;text-align:center;}
-  .quote .mark{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--red);line-height:1;}
-  .quote p{
-    font-size:clamp(16px,2.2vw,20px);line-height:1.65;
-    color:var(--ink);margin:0 0 18px;
+  /* Quote denser */
+  .quote{
+    background:var(--paper);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
-  .quote .who{
-    font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  }
+  .quote .wrap{max-width:740px;text-align:center;}
+  .quote .mark{font-family:'Bebas Neue',sans-serif;font-size:54px;color:var(--red);line-height:1;}
+  .quote p{font-size:clamp(15px,2vw,18px);line-height:1.6;color:var(--ink);margin:0 0 14px;}
+  .quote .who{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
 
   /* Partners */
-  .partners-head{text-align:center;margin:0 auto 32px;max-width:520px;}
+  .partners-head{text-align:center;margin:0 auto 24px;}
   .partners-head .sec-title{margin:0 auto;}
   .partners-strip{
     display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-    gap:28px 36px;opacity:.78;
+    gap:22px 32px;opacity:.75;
   }
-  .partners-strip img{height:36px;width:auto;object-fit:contain;filter:grayscale(1);}
+  .partners-strip img{height:32px;width:auto;object-fit:contain;filter:grayscale(1);}
 
   /* Contact */
-  .contact{background:var(--paper);padding-bottom:80px;}
+  .contact{background:#fff;padding-bottom:64px;}
   .contact-shell{
     display:grid;grid-template-columns:1fr;
     border-radius:10px;overflow:hidden;
-    border:1px solid var(--line);
-    box-shadow:var(--shadow);
-    background:#fff;
+    border:1px solid var(--line);box-shadow:var(--shadow);
   }
   @media(min-width:860px){.contact-shell{grid-template-columns:.95fr 1.05fr;}}
-  .contact-info{
-    background:var(--navy-deep);
-    color:#fff;padding:32px 24px;
-  }
-  @media(min-width:768px){.contact-info{padding:42px 36px;}}
-  .contact-info h2{color:#fff;font-size:clamp(30px,4vw,44px);margin-bottom:10px;}
-  .contact-info .sub{color:rgba(255,255,255,.75);line-height:1.6;margin:0 0 24px;font-size:15px;}
-  .info-row{display:flex;gap:12px;margin-bottom:16px;}
+  .contact-info{background:var(--navy-deep);color:#fff;padding:28px 22px;}
+  @media(min-width:768px){.contact-info{padding:36px 32px;}}
+  .contact-info h2{color:#fff;font-size:clamp(28px,4vw,40px);margin-bottom:8px;}
+  .contact-info .sub{color:rgba(255,255,255,.75);line-height:1.55;margin:0 0 20px;font-size:14.5px;}
+  .info-row{display:flex;gap:12px;margin-bottom:14px;}
   .info-row .ic{
-    width:34px;height:34px;border-radius:4px;flex-shrink:0;
-    display:grid;place-items:center;
-    background:rgba(200,16,46,.18);color:#ffb3bf;font-size:12px;font-weight:700;
+    width:32px;height:32px;border-radius:4px;flex-shrink:0;
+    display:grid;place-items:center;background:rgba(200,16,46,.18);color:#ffb3bf;
+    font-size:11px;font-weight:700;
   }
   .info-row span{
     display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-    color:#9eb3d0;margin-bottom:3px;font-weight:700;
+    color:#9eb3d0;margin-bottom:2px;font-weight:700;
   }
-  .info-row a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;word-break:break-word;}
-  .map-wrap{min-height:300px;position:relative;background:#e8eef6;}
-  @media(min-width:860px){.map-wrap{min-height:440px;}}
+  .info-row a{color:#fff;text-decoration:none;font-weight:600;font-size:14.5px;word-break:break-word;}
+  .map-wrap{min-height:280px;position:relative;background:#e8eef6;}
+  @media(min-width:860px){.map-wrap{min-height:400px;}}
   .map-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 
-  /* Footer */
   footer{
     background:#fff;color:var(--muted);
-    padding:22px 0;border-top:3px solid var(--red);
+    padding:18px 0;border-top:3px solid var(--red);
   }
-  footer .wrap{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;}
-  footer img{height:36px;width:auto;}
-  footer p{margin:0;font-size:12.5px;}
-  footer .f-links{display:flex;gap:16px;}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;}
+  footer img{height:34px;width:auto;}
+  footer p{margin:0;font-size:12px;}
+  footer .f-links{display:flex;gap:14px;}
   footer .f-links a{color:var(--navy);text-decoration:none;font-size:13px;font-weight:600;}
 </style>
 </head>
@@ -448,7 +425,7 @@
 <header>
   <div class="nav">
     <a class="brand" href="#top" aria-label="Jorge's HVAC home">
-      <img src="assets/logo/jorges-logo-clear.png" width="190" height="52" alt="Jorge's Air Conditioning &amp; Heating">
+      <img src="assets/logo/jorges-logo-clear.png" width="182" height="50" alt="Jorge's Air Conditioning &amp; Heating">
     </a>
     <nav class="links" aria-label="Primary">
       <a href="#about">About</a>
@@ -463,55 +440,54 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <img class="hero-brand" src="assets/logo/jorges-logo-hero.png" width="420" height="115" alt="Jorge's Air Conditioning &amp; Heating">
-        <h1>Home comfort you can <span>count on</span>.</h1>
-        <p class="lead">Professional heating, cooling, air quality, and water heater service for Massachusetts homes — done right the first time.</p>
-        <div class="cta-row">
-          <a class="btn btn-red" href="tel:5087365180">Call for a free quote</a>
-          <a class="btn btn-outline" href="#services">Explore services</a>
-        </div>
-        <div class="hero-meta">
-          <div><b>Since 2019</b><span>Marlborough, MA</span></div>
-          <div><b>Mass Save®</b><span>Rebate partner</span></div>
-          <div><b>10+ years</b><span>Hands-on craft</span></div>
-        </div>
-      </div>
-      <div class="hero-photo" role="img" aria-label="Jorge's HVAC service fleet"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <img class="hero-logo" src="assets/logo/jorges-logo-hero.png" width="210" height="58" alt="Jorge's Air Conditioning &amp; Heating">
+    <h1>COMFORT THAT HOLDS UP.<br><em>SERVICE THAT SHOWS UP.</em></h1>
+    <p class="lead">Heating, cooling, and hot water for Massachusetts homes — installed clean, priced clear, and built to last through every season.</p>
+    <div class="cta-row">
+      <a class="btn btn-red" href="tel:5087365180">Call for a free quote</a>
+      <a class="btn btn-ghost" href="#services">View services</a>
     </div>
   </div>
 </section>
 
+<div class="wrap" style="position:relative;z-index:3;">
+  <div class="hero-bar">
+    <div><b>Since 2019</b><span>Marlborough, MA</span></div>
+    <div><b>Mass Save®</b><span>Rebate partner</span></div>
+    <div><b>Licensed crew</b><span>Residential &amp; commercial</span></div>
+  </div>
+</div>
+
 <div class="usa-stripe">
   <article>
-    <h3>Residential &amp; commercial</h3>
-    <p>Installs, repairs, and maintenance built around how New England homes actually run.</p>
+    <h3>Repair &amp; installation</h3>
+    <p>Fast diagnostics, clean installs, and systems sized for the home — not the brochure.</p>
   </article>
   <article>
     <h3>Heat pumps &amp; gas</h3>
-    <p>High-efficiency systems sized correctly — not sold off a price sheet.</p>
+    <p>High-efficiency options with the right load calc, airflow, and start-up checks.</p>
   </article>
   <article>
-    <h3>Show up. Finish strong.</h3>
-    <p>Clear communication, clean job sites, and work we stand behind.</p>
+    <h3>On time. On point.</h3>
+    <p>Clear schedules, tidy job sites, and work we put our name on.</p>
   </article>
 </div>
 
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div class="about-photo">
-      <img src="assets/images/fabiano-garage.jpg" alt="Jorge's HVAC technician with branded service fleet">
+      <img src="assets/images/fabiano-garage.jpg" alt="Jorge's HVAC technician with branded service vans">
     </div>
     <div class="about-copy">
-      <span class="eyebrow">Who we are</span>
-      <h2 class="sec-title">A local team with American work ethic.</h2>
-      <p class="sec-copy">Jorge’s Air Conditioning &amp; Heating was built to bring dependable comfort to Massachusetts families — with trained technicians, honest recommendations, and installations that hold up through hard winters and humid summers.</p>
-      <p>We don’t cut corners on equipment, sizing, or follow-through. From the first phone call to the final system check, our standard is simple: protect your home, respect your time, and leave the job cleaner than we found it.</p>
+      <span class="eyebrow">About Jorge’s</span>
+      <h2 class="sec-title">A Marlborough HVAC company homeowners trust.</h2>
+      <p class="sec-copy">Jorge’s Air Conditioning &amp; Heating serves homeowners and light commercial clients across the MetroWest area with professional installs, repairs, and maintenance.</p>
+      <p>We focus on the fundamentals that keep systems running: correct sizing, quality equipment, clean ductwork, and follow-through after the van leaves. That is how first-time calls become long-term customers.</p>
       <div class="pledge">
-        <strong>Our commitment</strong>
-        <span>Fair pricing. Clear timelines. Workmanship that matches the Jorge’s name on the van.</span>
+        <strong>Our standard</strong>
+        <span>Straight answers. Fair pricing. Workmanship that matches the Jorge’s name on the van.</span>
       </div>
     </div>
   </div>
@@ -520,41 +496,41 @@
 <section class="services" id="services">
   <div class="wrap">
     <div class="services-head">
-      <span class="eyebrow">What we do</span>
-      <h2 class="sec-title">Four services. One standard of care.</h2>
-      <p class="sec-copy">Whether you need a repair today or a full system upgrade, we treat every call like it matters — because it does.</p>
+      <span class="eyebrow">Services</span>
+      <h2 class="sec-title">What we handle — end to end.</h2>
+      <p class="sec-copy">One team for cooling, heating, air quality, and hot water. Call once. Get it done right.</p>
     </div>
-    <div class="service-list">
-      <article class="service-row">
+    <div class="service-grid">
+      <article class="service-card">
         <div class="shot" style="background-image:url('assets/images/service-cooling.jpg')"></div>
         <div class="body">
           <div class="num">01 — Cooling</div>
           <h3>Air Conditioning</h3>
-          <p>When the Massachusetts heat hits, you need a system that keeps up. We diagnose, repair, and install cooling systems built for real homes — not quick fixes that fail mid-July.</p>
+          <p>Tune-ups, repairs, and new AC installs that keep Massachusetts summers under control.</p>
         </div>
       </article>
-      <article class="service-row">
+      <article class="service-card">
         <div class="shot" style="background-image:url('assets/images/service-install.jpg')"></div>
         <div class="body">
           <div class="num">02 — Heating</div>
           <h3>Heating Systems</h3>
-          <p>Furnaces, heat pumps, and high-efficiency upgrades installed with precision. We get the details right — airflow, combustion, controls — so your family stays warm when it counts.</p>
+          <p>Furnaces and heat pumps installed with precise airflow, controls, and safety checks.</p>
         </div>
       </article>
-      <article class="service-row">
+      <article class="service-card">
         <div class="shot" style="background-image:url('assets/images/service-duct.jpg')"></div>
         <div class="body">
           <div class="num">03 — Air Quality</div>
           <h3>Indoor Air Quality</h3>
-          <p>Cleaner air starts with the system behind your walls. From ductwork to filtration, we help reduce dust, allergens, and stale air so your home feels as healthy as it is comfortable.</p>
+          <p>Ductwork, filtration, and airflow solutions that cut dust and improve comfort room to room.</p>
         </div>
       </article>
-      <article class="service-row">
+      <article class="service-card">
         <div class="shot" style="background-image:url('assets/images/service-water.jpg')"></div>
         <div class="body">
           <div class="num">04 — Hot Water</div>
           <h3>Water Heaters</h3>
-          <p>Reliable hot water, installed to last. We recommend efficient gas water heaters matched to your household demand — with clean installs and code-compliant connections.</p>
+          <p>Efficient gas water heaters installed to code — reliable hot water when you need it.</p>
         </div>
       </article>
     </div>
@@ -564,9 +540,9 @@
 <section class="field" id="work">
   <div class="field-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="eyebrow" style="color:#ffb3bf;">In the field</span>
-    <h2>Real jobs. Real systems. No shortcuts.</h2>
-    <p>From attic installs to duct runs in open framing, our crew shows up ready — tools out, plan clear, and pride in every connection.</p>
+    <span class="eyebrow light">Our work</span>
+    <h2>Built for New England winters — and humid summers.</h2>
+    <p>Every install is planned, set, and verified. From attic equipment to finished start-up, we treat the details like they matter — because they do.</p>
     <a class="btn btn-red" href="tel:5087365180">Schedule service</a>
   </div>
 </section>
@@ -574,21 +550,33 @@
 <section class="videos" id="videos">
   <div class="wrap">
     <div class="videos-head">
-      <span class="eyebrow">See the work</span>
-      <h2 class="sec-title">From the shop to the job site.</h2>
-      <p class="sec-copy">A look at how Jorge’s operates — fleet ready, crew prepared, and focused on getting the install done the right way.</p>
+      <span class="eyebrow">In action</span>
+      <h2 class="sec-title">See the fleet and the job site.</h2>
+      <p class="sec-copy">Tap play — videos run right here on the page, no fullscreen required.</p>
     </div>
     <div class="video-grid">
-      <div class="video-card">
-        <video controls playsinline preload="metadata" poster="assets/images/poster-01.jpg">
-          <source src="assets/videos/work-01.mp4" type="video/mp4">
-        </video>
+      <div class="video-card" data-player>
+        <video
+          playsinline
+          webkit-playsinline
+          preload="metadata"
+          poster="assets/images/poster-01.jpg"
+          src="assets/videos/work-01.mp4"
+          controlslist="nodownload"
+        ></video>
+        <button class="play-btn" type="button" aria-label="Play video"><span>▶</span></button>
         <span class="video-label">Fleet &amp; crew</span>
       </div>
-      <div class="video-card">
-        <video controls playsinline preload="metadata" poster="assets/images/poster-02.jpg">
-          <source src="assets/videos/work-02.mp4" type="video/mp4">
-        </video>
+      <div class="video-card" data-player>
+        <video
+          playsinline
+          webkit-playsinline
+          preload="metadata"
+          poster="assets/images/poster-02.jpg"
+          src="assets/videos/work-02.mp4"
+          controlslist="nodownload"
+        ></video>
+        <button class="play-btn" type="button" aria-label="Play video"><span>▶</span></button>
         <span class="video-label">On the job</span>
       </div>
     </div>
@@ -597,15 +585,15 @@
 
 <section class="proof">
   <div class="wrap proof-grid">
-    <div class="proof-photo" role="img" aria-label="Professional Bosch HVAC installation in a residential attic"></div>
+    <div class="proof-photo" role="img" aria-label="Jorge's HVAC technician installing ductwork"></div>
     <div class="proof-panel">
-      <span class="eyebrow" style="color:#ffb3bf;">Why homeowners choose us</span>
+      <span class="eyebrow light">Why call Jorge’s</span>
       <h2>Quality equipment. Careful installs.</h2>
-      <p>We partner with trusted manufacturers and take the time to set systems up correctly — because comfort only lasts when the workmanship does.</p>
+      <p>We partner with trusted manufacturers and take the time to commission every system the right way.</p>
       <ul class="checks">
-        <li>Mass Save® partner — we help you chase available rebates</li>
+        <li>Mass Save® partner — help capturing available rebates</li>
         <li>Heat pump and high-efficiency specialists</li>
-        <li>Residential and light commercial experience</li>
+        <li>Residential and light commercial projects</li>
         <li>Clear quotes and accountable follow-through</li>
       </ul>
     </div>
@@ -615,7 +603,7 @@
 <section class="quote">
   <div class="wrap">
     <div class="mark">“</div>
-    <p>I have a remodeling company, and I always recommend Jorge’s HVAC to my clients. They updated my own home — replacing oil with a high-efficiency system — and handled everything from equipment selection to the final details. As Mass Save partners, they helped me apply for $10K in rebates. Incredible team.</p>
+    <p>I recommend Jorge’s HVAC to my remodeling clients. They replaced my oil system with a high-efficiency setup and handled everything from equipment selection to final details. As Mass Save partners, they helped me apply for $10K in rebates.</p>
     <div class="who">— Isac Silva, Homeowner &amp; Contractor</div>
   </div>
 </section>
@@ -623,8 +611,8 @@
 <section id="partners">
   <div class="wrap">
     <div class="partners-head">
-      <span class="eyebrow">Trusted equipment</span>
-      <h2 class="sec-title">Brands we stand behind.</h2>
+      <span class="eyebrow">Equipment partners</span>
+      <h2 class="sec-title">Brands we install with confidence.</h2>
     </div>
     <div class="partners-strip">
       <img src="https://static.wixstatic.com/media/fc9479_d9d89bdbfcfb4cdebfdb4f18f1bef807~mv2.png" alt="American Standard">
@@ -643,9 +631,9 @@
   <div class="wrap">
     <div class="contact-shell">
       <div class="contact-info">
-        <span class="eyebrow" style="color:#ffb3bf;">Get in touch</span>
+        <span class="eyebrow light">Contact</span>
         <h2>Ready for a more comfortable home?</h2>
-        <p class="sub">Call or email the Jorge’s team. We’ll listen, inspect, and put together a clear plan — no pressure, no runaround.</p>
+        <p class="sub">Call or email the Jorge’s team. We’ll inspect, explain your options, and put together a clear plan.</p>
         <div class="info-row">
           <div class="ic">📍</div>
           <div>
@@ -685,7 +673,7 @@
 <footer>
   <div class="wrap">
     <div style="display:flex;align-items:center;gap:12px;">
-      <img src="assets/logo/jorges-logo-clear.png" width="130" height="36" alt="Jorge's HVAC">
+      <img src="assets/logo/jorges-logo-clear.png" width="124" height="34" alt="Jorge's HVAC">
       <p>© 2026 Jorge's HVAC. All rights reserved.</p>
     </div>
     <div class="f-links">
@@ -695,6 +683,55 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  document.querySelectorAll('[data-player]').forEach(function (card) {
+    var video = card.querySelector('video');
+    var btn = card.querySelector('.play-btn');
+    if (!video || !btn) return;
+
+    // Force inline playback attributes for iOS / Android WebViews
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('x5-playsinline', 'true');
+    video.setAttribute('x5-video-player-type', 'h5');
+    video.setAttribute('x5-video-player-fullscreen', 'false');
+    video.playsInline = true;
+    video.disablePictureInPicture = true;
+
+    function start() {
+      card.classList.add('is-playing');
+      video.setAttribute('controls', '');
+      var p = video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () {
+          card.classList.remove('is-playing');
+          video.removeAttribute('controls');
+        });
+      }
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      start();
+    });
+
+    video.addEventListener('pause', function () {
+      if (video.currentTime > 0 && !video.ended) {
+        /* keep controls visible while paused mid-play */
+      }
+    });
+
+    video.addEventListener('ended', function () {
+      card.classList.remove('is-playing');
+      video.removeAttribute('controls');
+      video.currentTime = 0;
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
