@@ -120,32 +120,83 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Need a user message" }) };
   }
 
+  // Prefer fast chat models; fall back if an account cannot use a given ID.
+  const modelAttempts = [
+    { model: "claude-haiku-4-5", max_tokens: 700 },
+    { model: "claude-sonnet-5", max_tokens: 1200, thinking: { type: "disabled" } },
+    { model: "claude-sonnet-4-6", max_tokens: 700 },
+    { model: "claude-sonnet-4-5", max_tokens: 700 },
+  ];
+
   try {
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 700,
+    let data = null;
+    let lastError = null;
+
+    for (const attempt of modelAttempts) {
+      const body = {
+        model: attempt.model,
+        max_tokens: attempt.max_tokens,
         system: SYSTEM_PROMPT,
         messages,
-      }),
-    });
+      };
+      if (attempt.thinking) body.thinking = attempt.thinking;
 
-    const data = await resp.json();
-    if (!resp.ok) {
-      console.error("Anthropic error", data);
+      const resp = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const json = await resp.json().catch(() => ({}));
+      if (resp.ok) {
+        data = json;
+        break;
+      }
+
+      lastError = {
+        status: resp.status,
+        type: json?.error?.type || null,
+        message: json?.error?.message || null,
+        model: attempt.model,
+      };
+      console.error("Anthropic error", lastError);
+
+      // Retry on model/not-found style errors; stop on auth/billing.
+      const msg = String(json?.error?.message || "").toLowerCase();
+      const type = String(json?.error?.type || "").toLowerCase();
+      if (
+        type.includes("authentication") ||
+        type.includes("permission") ||
+        type.includes("rate_limit") ||
+        msg.includes("credit") ||
+        msg.includes("billing") ||
+        msg.includes("api key")
+      ) {
+        break;
+      }
+    }
+
+    if (!data) {
+      const authIssue =
+        lastError &&
+        /auth|permission|api key|credit|billing/i.test(
+          `${lastError.type || ""} ${lastError.message || ""}`
+        );
       return {
         statusCode: 502,
         headers,
         body: JSON.stringify({
-          error: "upstream_error",
-          reply:
-            "I hit a temporary connection issue. Please call (508) 736-5180 and our team will help you right away.",
+          error: authIssue ? "api_auth_or_billing" : "upstream_error",
+          detail: lastError
+            ? `${lastError.model}: ${lastError.type || "error"}`
+            : "unknown",
+          reply: authIssue
+            ? "The AI key needs billing/access enabled in the Anthropic console. Meanwhile call (508) 736-5180 and our team will help you."
+            : "I hit a temporary connection issue. Please call (508) 736-5180 and our team will help you right away.",
         }),
       };
     }
