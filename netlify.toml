@@ -6,3 +6,23 @@
   for = "/assets/videos/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+[[redirects]]
+  from = "/services-8-1"
+  to = "/services/cooling/"
+  status = 301
+
+[[redirects]]
+  from = "/services-8"
+  to = "/services/heating/"
+  status = 301
+
+[[redirects]]
+  from = "/services-8-2"
+  to = "/services/air-quality/"
+  status = 301
+
+[[redirects]]
+  from = "/services-8-3"
+  to = "/services/water-heater/"
+  status = 301
