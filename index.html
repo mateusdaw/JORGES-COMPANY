@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jorge's HVAC | Air Conditioning &amp; Heating — Marlborough, MA</title>
+<meta name="description" content="Jorge's HVAC — residential heating, cooling, air quality and water heater specialists serving Marlborough, Massachusetts since 2019.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d1b2a;
+    --paper:#eef2f1;
+    --paper-2:#e2e9e7;
+    --copper:#c76b32;
+    --copper-2:#e08a4f;
+    --teal:#3f97ab;
+    --teal-2:#69b8c9;
+    --text:#1c2b36;
+    --text-soft:#4c5c66;
+    --line:rgba(13,27,42,0.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.disp{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  @media(max-width:640px){section{padding:64px 0;}}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,242,241,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1180px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:44px;width:auto;}
+  nav.links{display:flex;gap:32px;font-size:14.5px;font-weight:500;}
+  nav.links a{text-decoration:none;color:var(--text-soft);transition:color .2s;}
+  nav.links a:hover{color:var(--ink);}
+  .call-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    padding:10px 18px;border-radius:999px;
+    font-size:14px;font-weight:600;text-decoration:none;
+    white-space:nowrap;
+  }
+  .menu-toggle{display:none;}
+  @media(max-width:860px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink);}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:84px 0 60px;position:relative;overflow:hidden;}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--copper);font-weight:500;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--copper);display:inline-block;}
+  h1.hero-title{font-size:clamp(38px,5.2vw,64px);line-height:1.02;font-weight:600;}
+  h1.hero-title .accent{color:var(--copper);}
+  .hero p.lead{font-size:18px;line-height:1.6;color:var(--text-soft);margin:22px 0 32px;max-width:520px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--ink);color:var(--paper);padding:14px 26px;border-radius:10px;
+    text-decoration:none;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid var(--line);padding:14px 26px;border-radius:10px;text-decoration:none;
+    font-weight:600;font-size:15px;color:var(--ink);display:inline-flex;align-items:center;gap:8px;
+  }
+  .founded-row{display:flex;gap:28px;margin-top:44px;flex-wrap:wrap;}
+  .founded-row .stat{border-left:2px solid var(--line);padding-left:14px;}
+  .founded-row .stat b{display:block;font-family:'Space Grotesk';font-size:24px;color:var(--ink);}
+  .founded-row .stat span{font-size:12.5px;color:var(--text-soft);}
+
+  /* Dial signature graphic */
+  .dial-card{
+    background:var(--ink);border-radius:20px;padding:38px;position:relative;
+    box-shadow:0 30px 60px -20px rgba(13,27,42,0.45);
+  }
+  .dial-card .dial-label{
+    font-family:'IBM Plex Mono';font-size:12px;color:rgba(238,242,241,0.55);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;
+  }
+  .dial-readout{display:flex;justify-content:space-between;align-items:flex-end;margin-top:14px;}
+  .dial-readout .temp{font-family:'Space Grotesk';font-size:15px;color:var(--paper);font-weight:600;}
+  .dial-readout .cool{color:var(--teal-2);}
+  .dial-readout .heat{color:var(--copper-2);}
+
+  /* ---------- About ---------- */
+  .about .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.about .wrap{grid-template-columns:1fr;}}
+  .about-photo{border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 40px -18px rgba(13,27,42,0.35);}
+  .section-tag{font-family:'IBM Plex Mono';font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);font-weight:500;margin-bottom:10px;display:block;}
+  .about h2{font-size:clamp(28px,3.4vw,38px);margin-bottom:18px;}
+  .about p{color:var(--text-soft);line-height:1.75;font-size:16px;margin-bottom:16px;}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--paper-2);}
+  .services-head{max-width:560px;margin-bottom:52px;}
+  .services-head h2{font-size:clamp(28px,3.4vw,38px);}
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  @media(max-width:960px){.services-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.services-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--paper);border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -22px rgba(13,27,42,0.3);}
+  .service-card .img-wrap{height:150px;overflow:hidden;}
+  .service-card .img-wrap img{width:100%;height:100%;object-fit:cover;}
+  .service-card .body{padding:22px;}
+  .service-card .idx{font-family:'IBM Plex Mono';font-size:12px;color:var(--copper);margin-bottom:8px;display:block;}
+  .service-card h3{font-size:19px;margin-bottom:10px;}
+  .service-card p{font-size:14.5px;color:var(--text-soft);line-height:1.6;margin:0;}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:12px;
+  }
+  @media(max-width:860px){.gallery-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:110px;}}
+  @media(max-width:560px){.gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:100px;}}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px;transition:transform .35s ease;}
+  .gallery-grid a{overflow:hidden;border-radius:10px;display:block;}
+  .gallery-grid a:hover img{transform:scale(1.08);}
+  .g-big{grid-column:span 2;grid-row:span 2;}
+  @media(max-width:560px){.g-big{grid-column:span 2;grid-row:span 1;}}
+
+  /* ---------- Testimonial ---------- */
+  .testimonial{background:var(--ink);color:var(--paper);}
+  .testimonial .wrap{max-width:800px;text-align:center;}
+  .quote-mark{font-family:'Space Grotesk';font-size:64px;color:var(--copper);line-height:1;margin-bottom:8px;}
+  .testimonial p.quote{font-size:19px;line-height:1.75;color:rgba(238,242,241,0.9);margin-bottom:26px;}
+  .testimonial .who{font-family:'IBM Plex Mono';font-size:13px;color:var(--teal-2);letter-spacing:.04em;}
+
+  /* ---------- Partners ---------- */
+  .partners-head{text-align:center;max-width:520px;margin:0 auto 46px;}
+  .partners-strip{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:44px;
+    filter:grayscale(1);opacity:.75;
+  }
+  .partners-strip img{height:44px;width:auto;object-fit:contain;}
+
+  /* ---------- Contact / Map ---------- */
+  .contact{background:var(--paper-2);}
+  .contact .wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:0;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(13,27,42,0.35);}
+  @media(max-width:860px){.contact .wrap{grid-template-columns:1fr;}}
+  .contact-info{background:var(--ink);color:var(--paper);padding:52px 44px;}
+  .contact-info h2{color:var(--paper);font-size:clamp(26px,3vw,32px);margin-bottom:18px;}
+  .contact-info p.sub{color:rgba(238,242,241,0.65);line-height:1.7;margin-bottom:32px;font-size:15px;}
+  .info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:22px;}
+  .info-row .ic{width:34px;height:34px;border-radius:9px;background:rgba(199,107,50,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--copper-2);}
+  .info-row .txt a{text-decoration:none;font-weight:600;font-size:15.5px;}
+  .info-row .txt span{display:block;font-size:12.5px;color:rgba(238,242,241,0.55);margin-bottom:3px;font-family:'IBM Plex Mono';text-transform:uppercase;letter-spacing:.06em;}
+  .map-wrap{min-height:420px;position:relative;}
+  .map-wrap iframe{width:100%;height:100%;position:absolute;inset:0;border:0;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:36px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  footer .f-brand{display:flex;align-items:center;gap:10px;}
+  footer .f-brand img{height:30px;}
+  footer p{font-size:13px;color:var(--text-soft);margin:0;}
+  footer .f-social{display:flex;gap:16px;}
+  footer .f-social a{color:var(--text-soft);text-decoration:none;font-size:13px;font-weight:500;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="https://static.wixstatic.com/media/fc9479_6227c693219246b69a8003c278b263b8~mv2.png" alt="Jorge's HVAC logo">
+    </div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#partners">Partners</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="call-btn" href="tel:5087365180">📞 (508) 736-5180</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Marlborough, Massachusetts · Since 2019</span>
+      <h1 class="hero-title">Comfort, <span class="accent">dialed in</span> — every season.</h1>
+      <p class="lead">Jorge's HVAC installs, repairs, and maintains heating, cooling, air quality, and water heating systems for homes across Massachusetts. Founded by Fabiano Jorge José Júnior, built on a decade of hands-on craft.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="tel:5087365180">Call for a quote →</a>
+        <a class="btn-ghost" href="#services">See our services</a>
+      </div>
+      <div class="founded-row">
+        <div class="stat"><b>10+ yrs</b><span>Hands-on HVAC experience</span></div>
+        <div class="stat"><b>2019</b><span>Serving Marlborough, MA</span></div>
+        <div class="stat"><b>Mass Save®</b><span>Approved rebate partner</span></div>
+      </div>
+    </div>
+    <div class="dial-card">
+      <span class="dial-label">Live system range</span>
+      <svg viewBox="0 0 320 200" width="100%" height="auto">
+        <defs>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#69b8c9"/>
+            <stop offset="50%" stop-color="#eef2f1"/>
+            <stop offset="100%" stop-color="#e08a4f"/>
+          </linearGradient>
+        </defs>
+        <path d="M 30 170 A 130 130 0 0 1 290 170" fill="none" stroke="rgba(238,242,241,0.12)" stroke-width="18" stroke-linecap="round"/>
+        <path d="M 30 170 A 130 130 0 0 1 290 170" fill="none" stroke="url(#arcGrad)" stroke-width="18" stroke-linecap="round" stroke-dasharray="408" stroke-dashoffset="0"/>
+        <g>
+          <line id="needle" x1="160" y1="170" x2="160" y2="60" stroke="#eef2f1" stroke-width="4" stroke-linecap="round" transform-origin="160 170">
+            <animateTransform attributeName="transform" type="rotate" values="-55;55;-55" dur="7s" repeatCount="indefinite"/>
+          </line>
+          <circle cx="160" cy="170" r="8" fill="#c76b32"/>
+        </g>
+        <text x="30" y="196" fill="#69b8c9" font-family="IBM Plex Mono" font-size="12">COOL</text>
+        <text x="255" y="196" fill="#e08a4f" font-family="IBM Plex Mono" font-size="12">HEAT</text>
+      </svg>
+      <div class="dial-readout">
+        <span class="temp cool mono">62°F</span>
+        <span class="temp mono">balanced airflow</span>
+        <span class="temp heat mono">78°F</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-photo">
+      <img src="https://static.wixstatic.com/media/6af0bf_0059070eb35042699edf2f99a89b0881~mv2.jpg" alt="Fabiano Jorge José Júnior, founder of Jorge's HVAC">
+    </div>
+    <div>
+      <span class="section-tag">Our story</span>
+      <h2>A decade of craft, brought to Massachusetts.</h2>
+      <p>Jorge's Air Conditioning &amp; Heating was founded by Fabiano Jorge José Júnior, a seasoned HVAC professional originally from São Paulo, Brazil. Fabiano brought a wealth of technical know-how and a genuine passion for comfort to Marlborough, where he's called home since 2019.</p>
+      <p>Every job — install, repair, or routine maintenance — is handled with the same attention to detail, whether it's a full system replacement or a seasonal tune-up. That commitment is what's turned first-time customers into long-term clients across the region.</p>
+      <p>Jorge's HVAC is also a proud <strong>Mass Save® partner</strong>, helping homeowners navigate rebates on high-efficiency system upgrades — often worth thousands of dollars back.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <span class="section-tag">What we do</span>
+      <h2>Four ways we keep your home comfortable.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="img-wrap"><img src="https://static.wixstatic.com/media/a3c153_56669e38ce904a728a6246879d546efe~mv2.jpg" alt="Air conditioning cooling service"></div>
+        <div class="body">
+          <span class="idx">01 — Cooling</span>
+          <h3>Cooling</h3>
+          <p>Warm air, rising bills, or a unit that never shuts off are signs it's time for a tune-up, repair, or new install.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="img-wrap"><img src="https://static.wixstatic.com/media/c72cc3075b6b4cb0a4b5691df7a374e9.jpg" alt="Heating system repair"></div>
+        <div class="body">
+          <span class="idx">02 — Heating</span>
+          <h3>Heating</h3>
+          <p>Full-line heating and cooling repairs and installs, handled by a team trained on today's most efficient systems.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="img-wrap"><img src="https://static.wixstatic.com/media/6af0bf_21682578ac074589a72baededa5db661~mv2.jpeg" alt="Indoor air quality solutions"></div>
+        <div class="body">
+          <span class="idx">03 — Air Quality</span>
+          <h3>Air Quality</h3>
+          <p>We spend 80–90% of our lives indoors. We help clear the air of allergens, mold, and household pollutants.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="img-wrap"><img src="https://static.wixstatic.com/media/6af0bf_4f864af9c4084b5ca4c1fb94f4057456~mv2.jpeg" alt="Gas water heater installation"></div>
+        <div class="body">
+          <span class="idx">04 — Water Heater</span>
+          <h3>Water Heaters</h3>
+          <p>High-efficiency gas water heaters, engineered for reliable hot water and installed to last.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="services-head">
+      <span class="section-tag">Field work</span>
+      <h2>Recent installs &amp; repairs.</h2>
+    </div>
+    <div class="gallery-grid">
+      <a class="g-big" href="https://static.wixstatic.com/media/fc9479_60979dba7e684342903971198f5626d5~mv2.jpeg" target="_blank"><img src="https://static.wixstatic.com/media/fc9479_60979dba7e684342903971198f5626d5~mv2.jpeg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/fc9479_14ffb78b35f049d3afb1933136d7eb33~mv2.jpeg" target="_blank"><img src="https://static.wixstatic.com/media/fc9479_14ffb78b35f049d3afb1933136d7eb33~mv2.jpeg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/fc9479_774953a46e1c450782778f22073405b7~mv2.jpeg" target="_blank"><img src="https://static.wixstatic.com/media/fc9479_774953a46e1c450782778f22073405b7~mv2.jpeg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/fc9479_d36e43104c43455ea2e08a2913b02959~mv2.jpeg" target="_blank"><img src="https://static.wixstatic.com/media/fc9479_d36e43104c43455ea2e08a2913b02959~mv2.jpeg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/6af0bf_ab69b0f250004332ac04d1683e96c022f003.jpg" target="_blank"><img src="https://static.wixstatic.com/media/6af0bf_ab69b0f250004332ac04d1683e96c022f003.jpg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/6af0bf_f7a6e0abb18545e599bedf4788f11f24~mv2.jpg" target="_blank"><img src="https://static.wixstatic.com/media/6af0bf_f7a6e0abb18545e599bedf4788f11f24~mv2.jpg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/6af0bf_a3e02ba2478d49bdb0521d89520cb864~mv2.jpg" target="_blank"><img src="https://static.wixstatic.com/media/6af0bf_a3e02ba2478d49bdb0521d89520cb864~mv2.jpg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/6af0bf_21291bddd34b43ddb1283bdc72a72e00~mv2.jpg" target="_blank"><img src="https://static.wixstatic.com/media/6af0bf_21291bddd34b43ddb1283bdc72a72e00~mv2.jpg" alt="HVAC job site photo"></a>
+      <a href="https://static.wixstatic.com/media/6af0bf_511a3db5c3a44da0bc64b3d94ef82dff~mv2.jpg" target="_blank"><img src="https://static.wixstatic.com/media/6af0bf_511a3db5c3a44da0bc64b3d94ef82dff~mv2.jpg" alt="HVAC job site photo"></a>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="wrap">
+    <div class="quote-mark">"</div>
+    <p class="quote">I have a remodeling and renovation company, and I always recommend Jorge's HVAC to my clients. I recently updated my own home's system — replacing an oil system with a high-efficiency one — and they handled everything from equipment selection to the final details. They're Mass Save partners and helped me apply for $10K in rebates. Incredible team.</p>
+    <div class="who">— ISAC SILVA, HOMEOWNER &amp; CONTRACTOR</div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="wrap">
+    <div class="partners-head">
+      <span class="section-tag">Trusted equipment</span>
+      <h2>Working with the best, to give you the best.</h2>
+    </div>
+    <div class="partners-strip">
+      <img src="https://static.wixstatic.com/media/fc9479_d9d89bdbfcfb4cdebfdb4f18f1bef807~mv2.png" alt="American Standard">
+      <img src="https://static.wixstatic.com/media/fc9479_b21fe7f79837451b898548a3047d15c5~mv2.png" alt="Viessmann">
+      <img src="https://static.wixstatic.com/media/fc9479_6e2365478aa744669d7b43fcd9af9023~mv2.png" alt="Goodman">
+      <img src="https://static.wixstatic.com/media/fc9479_62b9f2e776924a3fb985a25b045e7283~mv2.png" alt="Fujitsu">
+      <img src="https://static.wixstatic.com/media/fc9479_4fc2f5d1a4834160b5f87989683364e3~mv2.png" alt="Trane">
+      <img src="https://static.wixstatic.com/media/fc9479_2b391b04d5f244e3a72639884554afff~mv2.png" alt="Concord">
+      <img src="https://static.wixstatic.com/media/fc9479_1a184c3d9d0d44eb93fc24f3d7b8cde6~mv2.png" alt="First Co">
+      <img src="https://static.wixstatic.com/media/fc9479_e1c1ed7fa6a1403bbee824621b095758~mv2.png" alt="Daikin">
+      <img src="https://static.wixstatic.com/media/fc9479_9b89e1243cc24a1d83a5c691467ba5d6~mv2.webp" alt="Mass Save">
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-info">
+      <span class="section-tag" style="color:#69b8c9;">Get in touch</span>
+      <h2>Ready for a comfortable home?</h2>
+      <p class="sub">Call, email, or stop by — Fabiano and the team are ready to quote your next install, repair, or maintenance visit.</p>
+
+      <div class="info-row">
+        <div class="ic">📍</div>
+        <div class="txt"><span>Location</span><a href="https://maps.google.com/?q=200+E+Main+St,+Marlborough,+MA+01752" target="_blank">200 E Main St, Marlborough, MA 01752</a></div>
+      </div>
+      <div class="info-row">
+        <div class="ic">📞</div>
+        <div class="txt"><span>Phone</span><a href="tel:5087365180">(508) 736-5180</a></div>
+      </div>
+      <div class="info-row">
+        <div class="ic">✉️</div>
+        <div class="txt"><span>Email</span><a href="mailto:hvacjorges@gmail.com">hvacjorges@gmail.com</a></div>
+      </div>
+      <div class="info-row">
+        <div class="ic">📷</div>
+        <div class="txt"><span>Instagram</span><a href="https://www.instagram.com/jorges_company/" target="_blank">@jorges_company</a></div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <iframe loading="lazy" src="https://www.google.com/maps?q=200+E+Main+St,+Marlborough,+MA+01752&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-brand">
+      <img src="https://static.wixstatic.com/media/fc9479_6227c693219246b69a8003c278b263b8~mv2.png" alt="Jorge's HVAC logo">
+      <p>© 2026 Jorge's HVAC. All rights reserved.</p>
+    </div>
+    <div class="f-social">
+      <a href="https://www.instagram.com/jorges_company/" target="_blank">Instagram</a>
+      <a href="tel:5087365180">Call</a>
+      <a href="mailto:hvacjorges@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
