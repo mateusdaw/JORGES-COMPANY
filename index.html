@@ -88,9 +88,26 @@
   @media(min-width:768px){.nav{padding:11px 28px;}}
   .brand img{height:44px;width:auto;}
   @media(min-width:900px){.brand img{height:50px;}}
-  .links{display:flex;gap:22px;font-size:14px;font-weight:600;}
-  .links a{color:var(--muted);text-decoration:none;}
-  .links a:hover{color:var(--navy);}
+  .links{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;}
+  .links > a{color:var(--muted);text-decoration:none;}
+  .links > a:hover{color:var(--navy);}
+  .nav-drop{position:relative;}
+  .nav-drop > summary{
+    list-style:none;cursor:pointer;color:var(--muted);font-weight:600;
+  }
+  .nav-drop > summary::-webkit-details-marker{display:none;}
+  .nav-drop > summary::after{content:" ▾";font-size:10px;}
+  .nav-drop[open] > summary{color:var(--navy);}
+  .nav-drop-menu{
+    position:absolute;top:calc(100% + 10px);left:0;min-width:180px;z-index:70;
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    box-shadow:var(--shadow);padding:8px;display:grid;gap:2px;
+  }
+  .nav-drop-menu a{
+    display:block;padding:10px 12px;border-radius:6px;text-decoration:none;
+    color:var(--ink);font-size:14px;font-weight:600;
+  }
+  .nav-drop-menu a:hover{background:var(--paper);color:var(--red);}
   .call-pill{
     background:var(--red);color:#fff;text-decoration:none;
     padding:10px 14px;border-radius:4px;font-weight:700;font-size:13px;
@@ -111,10 +128,12 @@
   @media(max-width:860px){
     .links{
       display:none;position:absolute;top:100%;left:0;right:0;
-      background:#fff;flex-direction:column;padding:12px 18px 16px;gap:12px;
+      background:#fff;flex-direction:column;align-items:stretch;
+      padding:12px 18px 16px;gap:4px;
       border-bottom:1px solid var(--line);
     }
     .links.open{display:flex;}
+    .nav-drop-menu{position:static;box-shadow:none;border:0;padding:4px 0 4px 12px;}
     .menu-btn{display:block;}
     .nav{position:relative;}
     .call-pill{display:none;}
@@ -602,7 +621,16 @@
     </a>
     <nav class="links" aria-label="Primary">
       <a href="#about" data-i18n="nav_about">About</a>
-      <a href="#services" data-i18n="nav_services">Services</a>
+      <details class="nav-drop">
+        <summary data-i18n="nav_services">Services</summary>
+        <div class="nav-drop-menu">
+          <a href="services/cooling/">Cooling</a>
+          <a href="services/heating/">Heating</a>
+          <a href="services/air-quality/">Air Quality</a>
+          <a href="services/water-heater/">Water Heater</a>
+          <a href="services/">All Services</a>
+        </div>
+      </details>
       <a href="#work" data-i18n="nav_work">Our Work</a>
       <a href="#videos" data-i18n="nav_videos">Videos</a>
       <a href="#contact" data-i18n="nav_contact">Contact</a>
@@ -683,38 +711,38 @@
       <p class="sec-copy" data-i18n="services_lead">One team for cooling, heating, air quality, and hot water. Call once. Get it done right.</p>
     </div>
     <div class="service-grid">
-      <article class="service-card">
+      <a class="service-card" href="services/cooling/" style="text-decoration:none;color:inherit;display:block;">
         <div class="shot" style="background-image:url('assets/images/service-cooling.jpg')"></div>
         <div class="body">
           <div class="num" data-i18n="svc1_num">01 — Cooling</div>
           <h3 data-i18n="svc1_h">Air Conditioning</h3>
           <p data-i18n="svc1_p">Tune-ups, repairs, and new AC installs that keep Massachusetts summers under control.</p>
         </div>
-      </article>
-      <article class="service-card">
+      </a>
+      <a class="service-card" href="services/heating/" style="text-decoration:none;color:inherit;display:block;">
         <div class="shot" style="background-image:url('assets/images/service-install.jpg')"></div>
         <div class="body">
           <div class="num" data-i18n="svc2_num">02 — Heating</div>
           <h3 data-i18n="svc2_h">Heating Systems</h3>
           <p data-i18n="svc2_p">Furnaces and heat pumps installed with precise airflow, controls, and safety checks.</p>
         </div>
-      </article>
-      <article class="service-card">
+      </a>
+      <a class="service-card" href="services/air-quality/" style="text-decoration:none;color:inherit;display:block;">
         <div class="shot" style="background-image:url('assets/images/service-duct.jpg')"></div>
         <div class="body">
           <div class="num" data-i18n="svc3_num">03 — Air Quality</div>
           <h3 data-i18n="svc3_h">Indoor Air Quality</h3>
           <p data-i18n="svc3_p">Ductwork, filtration, and airflow solutions that cut dust and improve comfort room to room.</p>
         </div>
-      </article>
-      <article class="service-card">
+      </a>
+      <a class="service-card" href="services/water-heater/" style="text-decoration:none;color:inherit;display:block;">
         <div class="shot" style="background-image:url('assets/images/service-water.jpg')"></div>
         <div class="body">
           <div class="num" data-i18n="svc4_num">04 — Hot Water</div>
           <h3 data-i18n="svc4_h">Water Heaters</h3>
           <p data-i18n="svc4_p">Efficient gas water heaters installed to code — reliable hot water when you need it.</p>
         </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
